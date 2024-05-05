@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vite-fetch-project</title>
+  </head>
+  <body>
+    <div class="navbar mb-7">
+      <div class="navbar-start">
+        <a href="/index.html" class="navbar-item">SWAPI</a>
+      </div>
+      <div class="navbar-center">
+        <a href="/index.html" class="navbar-item">Home</a>
+        <a class="navbar-item navbar-active">Characters</a>
+        <a href="films.html" class="navbar-item">Films</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="flex justify-center">
+        <div id="spinner" class="spinner-dot-circle">
+          <div class="spinner-dot"></div>
+          <div class="spinner-dot"></div>
+          <div class="spinner-dot"></div>
+          <div class="spinner-dot"></div>
+          <div class="spinner-dot"></div>
+          <div class="spinner-dot"></div>
+          <div class="spinner-dot"></div>
+          <div class="spinner-dot"></div>
+        </div>
+      </div>
+      <div class="text-center mb-5">
+        <h1 id="h1" class="text-2xl mb-7">
+          Lear about all the characters of the Star Wars universe <br> by clicking the
+          button below
+        </h1>
+        <button id="btn" class="btn btn-outline-primary ">Get characters</button>
+      </div>
+      <!-- <div>
+        <ul id="ul"></ul>
+      </div> -->
+      <div id="box" class="flex justify-center gap-4 flex-wrap">
+        <!-- <div class="card">
+          <div class="card-body">
+            <h2 class="card-header">Maximizing Your Productivity at Work</h2>
+            
+              <button class="btn-secondary btn">Learn More</button>
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+    <script type="module" src="/src/characters.js"></script>
+  </body>
+</html>

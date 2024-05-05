@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-solid-primary{
+  display: none;
+}
+.card-body{
+  flex-direction: column-reverse;
+}
