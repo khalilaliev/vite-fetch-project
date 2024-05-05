@@ -1,18 +1,11 @@
 const URL = "https://swapi.dev/api/people/";
 
-// async function getCharacters() {
-//   const response = await fetch(URL);
-//   const result = response.json();
-//   console.log(result);
-// }
-// getCharacters();
-
 const spinner = document.getElementById("spinner");
 const btn = document.getElementById("btn");
 const li = document.createElement("li");
 const h1 = document.getElementById("h1");
 const box = document.getElementById("box");
-// const ul = document.getElementById("ul");
+const pagination = document.getElementById("pagination");
 
 function showSpinner() {
   spinner.style.display = "block";
@@ -21,6 +14,14 @@ function showSpinner() {
 function hideSpinner() {
   spinner.style.display = "none";
 }
+function showPagination() {
+  pagination.style.display = "inline-block";
+}
+function hidePagination() {
+  pagination.style.display = "none";
+}
+
+hidePagination();
 
 function getCharacters() {
   try {
@@ -29,7 +30,6 @@ function getCharacters() {
       const response = await fetch(URL);
       const result = await response.json();
       renderCharacters(result);
-      // console.log(result);
       h1.style.display = "none";
       btn.style.display = "none";
       hideSpinner();
@@ -38,6 +38,7 @@ function getCharacters() {
     console.error(error);
   } finally {
     hideSpinner();
+    pagination.style.display = "inline-block";
   }
 }
 getCharacters();
@@ -52,20 +53,14 @@ function renderCharacters(characters) {
     btn.innerText = "Show more";
     btn.className = "button";
     accordion.className = "accordion";
-    // const p = document.createElement("p");
     card.classList.add("card");
     cardBody.classList.add("card-body");
     h2.classList.add("card-header");
-    // p.classList.add("text-content2");
     h2.innerHTML = `${index + 1} ${character.name}`;
-    // p.innerHTML = /*html*/ `Gender: ${character.gender} <br>
-    // Hair color: ${character.hair_color} <br>
-    // Height: ${character.height}`;
     h2.appendChild(btn);
     box.appendChild(card);
     card.appendChild(cardBody);
     cardBody.appendChild(h2);
-    // h2.appendChild(p);
     card.addEventListener("mousemove", () => {
       btn.style.display = "inline-block";
     });
@@ -73,6 +68,7 @@ function renderCharacters(characters) {
       btn.style.display = "none";
     });
     let isOpen = false;
+    let accordionHeight = 0;
 
     btn.addEventListener("click", () => {
       if (!isOpen) {
@@ -86,21 +82,26 @@ function renderCharacters(characters) {
         Hair color: ${character.hair_color} <br>
         Height: ${character.height}cm`;
         cardBody.appendChild(accordion);
+        accordionHeight = accordion.scrollHeight;
+        accordion.style.height = "0";
+        setTimeout(() => {
+          accordion.style.height = accordionHeight + "px";
+        }, 0);
+
         button.addEventListener("click", () => {
           isOpen = false;
-          accordion.remove();
+          accordionHeight = accordion.scrollHeight;
+          accordion.style.height = "0";
           button.remove();
           h2.appendChild(btn);
         });
       } else {
         isOpen = false;
-        accordion.remove();
+        accordionHeight = accordion.scrollHeight;
+        accordion.style.height = "0";
+        accordion.innerHTML = "";
         h2.appendChild(btn);
       }
     });
-
-    // btn.addEventListener('click', () => {
-    //   accordion.remove()
-    // })
   });
 }
