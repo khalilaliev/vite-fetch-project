@@ -30,7 +30,8 @@ function getCharacters() {
       const result = await response.json();
       renderCharacters(result);
       // console.log(result);
-      // h1.style.display = "none";
+      h1.style.display = "none";
+      btn.style.display = "none";
       hideSpinner();
     });
   } catch (error) {
@@ -47,8 +48,10 @@ function renderCharacters(characters) {
     const cardBody = document.createElement("div");
     const h2 = document.createElement("h2");
     const btn = document.createElement("button");
-    btn.innerText = "Learn more";
-    btn.className = "btn btn-solid-primary";
+    const accordion = document.createElement("div");
+    btn.innerText = "Show more";
+    btn.className = "button";
+    accordion.className = "accordion";
     // const p = document.createElement("p");
     card.classList.add("card");
     cardBody.classList.add("card-body");
@@ -58,7 +61,7 @@ function renderCharacters(characters) {
     // p.innerHTML = /*html*/ `Gender: ${character.gender} <br>
     // Hair color: ${character.hair_color} <br>
     // Height: ${character.height}`;
-    cardBody.appendChild(btn);
+    h2.appendChild(btn);
     box.appendChild(card);
     card.appendChild(cardBody);
     cardBody.appendChild(h2);
@@ -69,5 +72,35 @@ function renderCharacters(characters) {
     card.addEventListener("mouseleave", () => {
       btn.style.display = "none";
     });
+    let isOpen = false;
+
+    btn.addEventListener("click", () => {
+      if (!isOpen) {
+        isOpen = true;
+        btn.remove();
+        const button = document.createElement("button");
+        button.className = "button1";
+        button.innerText = "Show less";
+        h2.appendChild(button);
+        accordion.innerHTML = /*html*/ `Gender: ${character.gender} <br>
+        Hair color: ${character.hair_color} <br>
+        Height: ${character.height}cm`;
+        cardBody.appendChild(accordion);
+        button.addEventListener("click", () => {
+          isOpen = false;
+          accordion.remove();
+          button.remove();
+          h2.appendChild(btn);
+        });
+      } else {
+        isOpen = false;
+        accordion.remove();
+        h2.appendChild(btn);
+      }
+    });
+
+    // btn.addEventListener('click', () => {
+    //   accordion.remove()
+    // })
   });
 }
